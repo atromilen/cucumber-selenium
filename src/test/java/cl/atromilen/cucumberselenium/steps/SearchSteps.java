@@ -26,7 +26,7 @@ public class SearchSteps {
         driver.close();
     }
 
-    @Given("the user is in the index page")
+    @Given("^the user is in the index page$")
     public void theUserIsInIndexPage(){
         driver.get("http://automationpractice.com/index.php");
         String title = driver.getTitle();
@@ -34,20 +34,21 @@ public class SearchSteps {
         Assert.assertEquals("My Store", title);
     }
 
-    @When("the user type dresses in the search bar")
-    public void theUserTypeDressesInTheSearchBar(){
-        driver.findElement(By.id("search_query_top")).sendKeys("dresses");
+    @When("^the user enters (.*) in the search bar$")
+    public void theUserEntersArticleInTheSearchBar(String article){
+        driver.findElement(By.id("search_query_top")).sendKeys(article);
     }
 
-    @When("the user clicks the search button")
+    @When("^the user clicks the search button$")
     public void theUserClicksTheButtonSearch(){
         driver.findElement(By.name("submit_search")).click();
     }
 
-    @Then("the dresses page appears")
-    public void theDressesPageAppears(){
+    @Then("^the (.*) page appears$")
+    public void theArticlePageAppears(String article){
         var title =driver.findElement(By.className("lighter")).getText();
-        Assert.assertEquals(title.toUpperCase(), "\"DRESSES\"");
+        var expected = String.format("\"%s\"", article.toUpperCase());
+        Assert.assertEquals(title.toUpperCase(), expected);
     }
 
 }
