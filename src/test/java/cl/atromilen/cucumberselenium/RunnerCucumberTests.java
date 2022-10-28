@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 @CucumberOptions(
         tags = "",
         features = "src/test/java/cl/atromilen/cucumberselenium/features",
-        glue = {"cl.atromilen.cucumberselenium.steps"},
+        glue = {"cl.atromilen.cucumberselenium.stepDefinitions"},
         plugin = {
                 "json:build/cucumber-reports/cucumber.json",
                 "rerun:build/cucumber-reports/rerun.txt"
